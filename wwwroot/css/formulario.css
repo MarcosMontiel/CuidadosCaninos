@@ -110,7 +110,7 @@ body {
 
 .contenedor-formulario .formulario .input-group input[type="text"].error, .contenedor-formulario .formulario .input-group input[type="date"].error, .contenedor-formulario .formulario .input-group select.error, .contenedor-formulario .formulario .input-group select.error {
     border-bottom: 2px solid #E84118;
-    color: #E84118;;
+    color: #E84118;
 }
 
 .contenedor-formulario .formulario .input-group input[type="text"].error+label, .contenedor-formulario .formulario .input-group input[type="date"].error+label, .contenedor-formulario .formulario .input-group select.error+label, .contenedor-formulario .formulario .input-group select.error+label {
