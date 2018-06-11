@@ -20,6 +20,8 @@
     <Content Remove="Views\ComPersona\Details.cshtml" />
     <Content Remove="Views\ComPersona\Edit.cshtml" />
     <Content Remove="Views\ComPersona\Index.cshtml" />
+    <Content Remove="wwwroot\css\formulario.css" />
+    <Content Remove="wwwroot\js\formulario.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\ComPersona\Create.cshtml" />
@@ -27,5 +29,7 @@
     <None Include="Views\ComPersona\Details.cshtml" />
     <None Include="Views\ComPersona\Edit.cshtml" />
     <None Include="Views\ComPersona\Index.cshtml" />
+    <None Include="wwwroot\css\formulario.css" />
+    <None Include="wwwroot\js\formulario.js" />
   </ItemGroup>
 </Project>

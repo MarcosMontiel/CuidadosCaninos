@@ -1,0 +1,183 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    background: #ECF0F1;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    padding-top: 55px;
+}
+
+/*START TITULO*/
+.titulo {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    background: #009432;
+    -webkit-box-shadow: 0px 0px 4px #009432;
+    box-shadow: 0px 0px 4px #78e08f;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.titulo .titulo2 {
+    color: white;
+    font-weight: bold;
+    margin-left: 3%;
+    padding-bottom: 10px;
+    padding-top: 11px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+/*END TITULO*/
+
+/*START FORM*/
+.contenedor-formulario {
+    color: #F2F2F2;
+    padding: 20px;
+    width: 100%;
+}
+
+.wrap {
+    width: 90%;
+    max-width: 1200px;
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 20px;
+    margin: auto;
+    background: white;
+    -webkit-box-shadow: 0px 0px 4px #78e08f;
+    box-shadow: 0px 0px 4px #78e08f;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.contenedor-formulario .formulario {
+    margin: auto;
+    width: 100%;
+}
+
+.contenedor-formulario .formulario .input-group {
+    position: relative;
+    margin-bottom: 35px;
+    width: 100%;
+}
+
+.contenedor-formulario .formulario .input-group input[type="text"],
+.contenedor-formulario .formulario .input-group input[type="date"] {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    padding-left: 15px;
+    background: none;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border-bottom: 2px solid #78e08f;
+    -webkit-box-shadow: 0px 0px 0px white;
+    box-shadow: 0px 0px 0px white;
+}
+
+.contenedor-formulario .formulario .input-group select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    padding-left: 15px;
+    background: none;
+    border-bottom: 2px solid #78e08f;
+    -webkit-box-shadow: 0px 0px 0px white;
+    box-shadow: 0px 0px 0px white;
+}
+
+.contenedor-formulario .formulario .input-group input[type="text"]:focus, .contenedor-formulario .formulario .input-group input[type="text"]:active, .contenedor-formulario .formulario .input-group input[type="date"]:focus, .contenedor-formulario .formulario .input-group input[type="date"]:active, .contenedor-formulario .formulario .input-group select:focus, .contenedor-formulario .formulario .input-group select:active {
+    border-bottom: 2px solid #009432;
+    outline: 0;
+}
+
+.contenedor-formulario .formulario .input-group input[type="text"].error, .contenedor-formulario .formulario .input-group input[type="date"].error, .contenedor-formulario .formulario .input-group select.error, .contenedor-formulario .formulario .input-group select.error {
+    border-bottom: 2px solid #E84118;
+    color: #E84118;;
+}
+
+.contenedor-formulario .formulario .input-group input[type="text"].error+label, .contenedor-formulario .formulario .input-group input[type="date"].error+label, .contenedor-formulario .formulario .input-group select.error+label, .contenedor-formulario .formulario .input-group select.error+label {
+    color: #E84118;
+}
+
+.contenedor-formulario .formulario .input-group label {
+    color: #2C3E50;
+}
+
+.contenedor-formulario .formulario .input-group label.label {
+    position: absolute;
+    top: 12px;
+    left: 0px;
+    font-size: 14px;
+    line-height: 3px;
+    margin-left: 20px;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    color: #C8D6E5;
+}
+
+.contenedor-formulario .formulario .input-group label.label.active {
+    font-weight: bold;
+    top: -14px;
+    font-size: 12px;
+    line-height: 0px;
+    color: #009432;
+}
+
+.contenedor-formulario .formulario .form-group {
+    position: relative;
+    margin-left: 15px;
+}
+
+.contenedor-formulario .formulario .form-group .aceptar {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    width: 14%;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    background: #009432;
+    border: 2px solid #009432;
+    color: white;
+    font-weight: bold;
+}
+
+.contenedor-formulario .formulario .form-group .aceptar:hover {
+    background: white;
+    color: #009432;
+}
+
+.contenedor-formulario .formulario .form-group .cancelar {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    margin-left: 15px;
+    width: 14%;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    background: #EB2F06;
+    border: 2px solid #EB2F06;
+    color: white;
+    font-weight: bold;
+}
+
+.contenedor-formulario .formulario .form-group .cancelar:hover {
+    background: white;
+    color: #EB2F06;
+}
+/*END FORM*/

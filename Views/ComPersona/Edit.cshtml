@@ -1,63 +1,71 @@
 @model Cuidados.Caninos.Marcos.Montiel.Models.ComPersona
-
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Persona - Editar";
 }
 
-<h2>Edit</h2>
+<link rel="stylesheet" href="~/css/formulario.css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+      integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+      crossorigin="anonymous">
 
-<h4>ComPersona</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<div class="contenedor-formulario">
+    <div class="titulo">
+        <h2 class="titulo2">Persona</h2>
+    </div>
+    <div class="wrap">
+        <form asp-action="Edit" class="formulario" name="formulario_registro">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ID" />
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="APaterno" class="control-label"></label>
-                <input asp-for="APaterno" class="form-control" />
-                <span asp-validation-for="APaterno" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AMaterno" class="control-label"></label>
-                <input asp-for="AMaterno" class="form-control" />
-                <span asp-validation-for="AMaterno" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Curp" class="control-label"></label>
-                <input asp-for="Curp" class="form-control" />
-                <span asp-validation-for="Curp" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaNac" class="control-label"></label>
-                <input asp-for="FechaNac" class="form-control" />
-                <span asp-validation-for="FechaNac" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FKComCatSexo" class="control-label"></label>
-                <select asp-for="FKComCatSexo" class="form-control" asp-items="ViewBag.FKComCatSexo"></select>
-                <span asp-validation-for="FKComCatSexo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FKComCatEscolaridad" class="control-label"></label>
-                <select asp-for="FKComCatEscolaridad" class="form-control" asp-items="ViewBag.FKComCatEscolaridad"></select>
-                <span asp-validation-for="FKComCatEscolaridad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div>
+                <div class="input-group">
+                    <div class="col-lg-6">
+                        <input asp-for="Nombre" class="form-control" type="text" id="Nombre" />
+                        <label asp-for="Nombre" class="control-label label active">Nombre</label>
+                    </div>
+                    <div class="col-lg-6">
+                        <input asp-for="APaterno" class="form-control" type="text" id="APaterno" />
+                        <label asp-for="APaterno" class="control-label label active">Apellido Paterno</label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="col-lg-6">
+                        <input asp-for="AMaterno" class="form-control" type="text" id="AMaterno" />
+                        <label asp-for="AMaterno" class="control-label label active">Apellido Materno</label>
+                    </div>
+                    <div class="col-lg-6">
+                        <select id="drop" asp-for="FKComCatSexo" class="form-control" asp-items="ViewBag.FKComCatSexo">
+                            <option value="0"></option>
+                        </select>
+                        <label asp-for="FKComCatSexo" class="control-label label active">Género</label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="col-lg-6">
+                        <input asp-for="FechaNac" class="form-control" type="date" id="FechaNac" />
+                        <label asp-for="FechaNac" class="control-label label active">Fecha de Nacimiento</label>
+                    </div>
+                    <div class="col-lg-6">
+                        <input asp-for="Curp" class="form-control" type="text" id="Curp" />
+                        <label asp-for="Curp" class="control-label label active">C.U.R.P</label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="col-lg-6">
+                        <select id="drop" asp-for="FKComCatEscolaridad" class="form-control" asp-items="ViewBag.FKComCatEscolaridad">
+                            <option value="0"></option>
+                        </select>
+                        <label asp-for="FKComCatEscolaridad" class="control-label label active">Escolaridad</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default aceptar"><i class="fas fa-save"></i> Guardar</button>
+                    <a asp-action="Index" class="btn btn-default cancelar"><i class="fas fa-times"></i> Cancelar</a>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<script src="~/js/formulario.js"></script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

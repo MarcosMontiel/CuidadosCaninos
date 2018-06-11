@@ -1,13 +1,13 @@
 @model IEnumerable<Cuidados.Caninos.Marcos.Montiel.Models.ComPersona>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Persona";
 }
 
-<h2>Index</h2>
+<h2>Persona</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-default">Agregar</a>
 </p>
 <table class="table">
     <thead>
@@ -52,7 +52,7 @@
                 @Html.DisplayFor(modelItem => item.Curp)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FechaNac)
+                @Html.DisplayFor(modelItem => item.FechaNac.Date)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ComCatEscolaridad.Nombre)
