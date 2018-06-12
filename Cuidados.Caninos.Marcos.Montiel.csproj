@@ -7,6 +7,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
+    <PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
+    <PackageReference Include="Bootstrap.Datepicker" Version="1.7.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +24,7 @@
     <Content Remove="Views\ComPersona\Index.cshtml" />
     <Content Remove="wwwroot\css\formulario.css" />
     <Content Remove="wwwroot\js\formulario.js" />
+    <Content Remove="wwwroot\css\jQueryDateTimePicker.css" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\ComPersona\Create.cshtml" />

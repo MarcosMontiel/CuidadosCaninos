@@ -3,7 +3,7 @@
     ViewData["Title"] = "Persona - Agregar";
 }
 
-<link rel="stylesheet" href="~/css/formulario.css" />
+<link rel="stylesheet" type="text/css" href="~/css/formulario.css" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
       integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
       crossorigin="anonymous">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="input-group">
                     <div class="col-lg-6">
-                        <input asp-for="FechaNac" class="form-control" type="text" id="FechaNac" />
+                        <input asp-for="FechaNac" class="form-control" type="date" id="FechaNac" />
                         <label asp-for="FechaNac" class="control-label label">Fecha de Nacimiento</label>
                     </div>
                     <div class="col-lg-6">
@@ -65,7 +65,7 @@
     </div>
 </div>
 
-<script src="~/js/formulario.js"></script>
+<script type="text/javascript" src="~/js/formulario.js"></script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
