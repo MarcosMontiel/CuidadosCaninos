@@ -25,6 +25,7 @@
     <Content Remove="wwwroot\css\formulario.css" />
     <Content Remove="wwwroot\js\formulario.js" />
     <Content Remove="wwwroot\css\jQueryDateTimePicker.css" />
+    <Content Remove="wwwroot\css\tablas.css" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\ComPersona\Create.cshtml" />
@@ -34,5 +35,6 @@
     <None Include="Views\ComPersona\Index.cshtml" />
     <None Include="wwwroot\css\formulario.css" />
     <None Include="wwwroot\js\formulario.js" />
+    <None Include="wwwroot\css\tablas.css" />
   </ItemGroup>
 </Project>
