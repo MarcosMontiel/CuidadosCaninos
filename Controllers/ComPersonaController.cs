@@ -19,10 +19,23 @@ namespace Cuidados.Caninos.Marcos.Montiel.Controllers
         }
 
         // GET: ComPersona
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchPerson)
         {
-            var cCContext = _context.ComPersona.Include(c => c.ComCatEscolaridad).Include(c => c.ComCatSexo);
-            return View(await cCContext.ToListAsync());
+            ViewData["CurrentFilter"] = searchPerson;
+
+            var persona = from s in _context.ComPersona select s;
+
+            if (!String.IsNullOrEmpty(searchPerson))
+            {
+                persona = persona.Where(s => s.Nombre.Contains(searchPerson) 
+                                        || s.APaterno.Contains(searchPerson));
+            }
+
+            persona = persona.Include(c => c.ComCatEscolaridad).Include(c => c.ComCatSexo);
+
+            // var cCContext = _context.ComPersona.Include(c => c.ComCatEscolaridad).Include(c => c.ComCatSexo);
+            // return View(await cCContext.ToListAsync());
+            return View(await persona.AsNoTracking().ToListAsync());
         }
 
         // GET: ComPersona/Details/5
