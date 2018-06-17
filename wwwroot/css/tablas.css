@@ -45,12 +45,82 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
     padding: 7px 10px 7px 10px;
-    border: 2px solid #34495e;
-    color: #34495e;
+    border: 3px solid #2c3e50;
+    color: #2c3e50;
     border-radius: 6px;
+    font-weight: bold;
+    -webkit-transition: .3s;
+    transition: .3s;
 }
 
 .wrap .form-group .agregar:hover {
-    background: white;
-    color: #34495e;
+    background: #2c3e50;
+    color: white;
+}
+
+.wrap .table-design {
+    position: relative;
+    margin: 0px 15px 0px 15px;
+}
+
+.wrap .table-design table {
+    width: 100%;
+}
+
+.wrap .table-design table .table-head {
+    background: #95afc0;
+    color: white;
+}
+
+.wrap .table-design table .table-head tr th {
+    padding: 12px 0px 10px 15px;
+    width: 20%;
+}
+
+.wrap .table-design table .table-body {
+    border-bottom: 2px solid #95afc0;
+}
+
+.wrap .table-design table .table-body td {
+    padding: 10px 0px 8px 15px;
+    width: 20%;
+}
+
+.wrap .table-design table .table-body td .detalle {
+    border: 2px solid #2E86DE;
+    margin: 10px 15px 10px 10px;
+    padding: 5px;
+    border-radius: 50%;
+    color: #2E86DE;
+}
+
+.wrap .table-design table .table-body td .detalle:hover {
+    background: #2E86DE;
+    color: white;
+}
+
+.wrap .table-design table .table-body td .editar {
+    border: 2px solid #009432;
+    margin: 10px 15px 10px 10px;
+    padding: 5px;
+    border-radius: 50%;
+    color: #009432;
+}
+
+.wrap .table-design table .table-body td .editar:hover {
+    background: #009432;
+    color: white;
+}
+
+.wrap .table-design table .table-body td .eliminar {
+    border: 2px solid #EB2F06;
+    margin: 10px 15px 10px 10px;
+    padding: 5px 7px 5px 7px;
+    border-radius: 50%;
+    color: #EB2F06;
+}
+
+.wrap .table-design table .table-body td .eliminar:hover {
+    background: #EB2F06;
+    color: white;
 }

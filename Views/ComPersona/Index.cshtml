@@ -17,8 +17,8 @@
             <a asp-action="Create" class="btn btn-default agregar"><i class="fas fa-plus"></i> Agregar</a>
         </div>
         <div class="table-design">
-            <table class="table">
-                <thead>
+            <table>
+                <thead class="table-head">
                     <tr>
                         <th>Nombre</th>
                         <th>Apellido Paterno</th>
@@ -30,7 +30,7 @@
                 <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr class="table-body">
                         <td>
                             @Html.DisplayFor(modelItem => item.Nombre)
                         </td>
@@ -44,9 +44,9 @@
                             @Html.DisplayFor(modelItem => item.ComCatSexo.Nombre)
                         </td>
                         <td>
-                            <a asp-action="Details" asp-route-id="@item.ID">Ver</a>
-                            <a asp-action="Edit" asp-route-id="@item.ID">Editar</a>
-                            <a asp-action="Delete" asp-route-id="@item.ID">Eliminar</a>
+                            <a asp-action="Details" asp-route-id="@item.ID" class="detalle"><i class="fas fa-eye"></i></a>
+                            <a asp-action="Edit" asp-route-id="@item.ID" class="editar"><i class="fas fa-edit"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.ID" class="eliminar"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 }
