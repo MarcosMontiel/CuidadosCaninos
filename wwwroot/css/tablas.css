@@ -43,19 +43,67 @@ body {
 
 .wrap .form-group .agregar {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    padding: 7px 10px 7px 10px;
-    border: 3px solid #2c3e50;
-    color: #2c3e50;
+    font-size: 14px;
+    padding: 5px 8px 5px 8px;
+    border: 3px solid #566473;
+    color: #566473;
     border-radius: 6px;
     font-weight: bold;
     -webkit-transition: .3s;
     transition: .3s;
+    margin-left: 10px;
 }
 
 .wrap .form-group .agregar:hover {
-    background: #2c3e50;
-    color: white;
+    background: white;
+}
+
+.wrap .form-group .search-text {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0px 0px 0px 30px;
+    padding: 5px 8px 5px 15px;
+    width: 270px;
+    border: 0;
+    outline: 0;
+    background: none;
+    border-bottom: 3px solid #566473;
+}
+
+.wrap .form-group .buscar {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 5px 8px 5px 8px;
+    border: 3px solid #566473;
+    color: #566473;
+    border-radius: 6px;
+    font-weight: bold;
+    -webkit-transition: .3s;
+    transition: .3s;
+    margin-left: 10px;
+}
+
+.wrap .form-group .buscar:hover {
+    background: white;
+}
+
+.wrap .form-group .limpiar {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 5px 8px 5px 8px;
+    border: 3px solid #566473;
+    color: #566473;
+    border-radius: 6px;
+    font-weight: bold;
+    -webkit-transition: .3s;
+    transition: .3s;
+    margin-left: 5px;
+}
+
+.wrap .form-group .limpiar:hover {
+    background: white;
+    color: #566473;
 }
 
 .wrap .table-design {
@@ -68,13 +116,18 @@ body {
 }
 
 .wrap .table-design table .table-head {
-    background: #95afc0;
-    color: white;
+    background: #009432;
 }
 
 .wrap .table-design table .table-head tr th {
     padding: 12px 0px 10px 15px;
     width: 20%;
+    color: white;
+}
+
+.wrap .table-design table .table-head tr th a {
+    color: white;
+    text-decoration: none;
 }
 
 .wrap .table-design table .table-body {
@@ -87,15 +140,15 @@ body {
 }
 
 .wrap .table-design table .table-body td .detalle {
-    border: 2px solid #2E86DE;
+    border: 2px solid #3867d6;
     margin: 10px 15px 10px 10px;
     padding: 5px;
     border-radius: 50%;
-    color: #2E86DE;
+    color: #3867d6;
 }
 
 .wrap .table-design table .table-body td .detalle:hover {
-    background: #2E86DE;
+    background: #3867d6;
     color: white;
 }
 

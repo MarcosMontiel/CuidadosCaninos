@@ -1,11 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cuidados.Caninos.Marcos.Montiel.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Cuidados.Caninos.Marcos.Montiel.Models;
 
 namespace Cuidados.Caninos.Marcos.Montiel.Controllers
 {
@@ -19,23 +18,54 @@ namespace Cuidados.Caninos.Marcos.Montiel.Controllers
         }
 
         // GET: ComPersona
-        public async Task<IActionResult> Index(string searchPerson)
+        public async Task<IActionResult> Index(string valuesOrder, string searchPerson)
         {
-            ViewData["CurrentFilter"] = searchPerson;
-
-            var persona = from s in _context.ComPersona select s;
-
-            if (!String.IsNullOrEmpty(searchPerson))
+            try
             {
-                persona = persona.Where(s => s.Nombre.Contains(searchPerson) 
-                                        || s.APaterno.Contains(searchPerson));
+                ViewData["CurrentFilter"] = searchPerson;
+                ViewData["NameOrderAscDesc"] = String.IsNullOrEmpty(valuesOrder) ? "nombre_desc" : "";
+                ViewData["APatOrderAscDesc"] = valuesOrder == "paterno_asc" ? "paterno_desc" : "paterno_asc";
+                ViewData["AMatOrderAscDesc"] = valuesOrder == "materno_asc" ? "materno_desc" : "materno_asc";
+
+                var persona = from s in _context.ComPersona select s;
+
+                // Ordenar valores desc y asc en la tabla
+                switch (valuesOrder)
+                {
+                    case "nombre_desc":
+                        persona = persona.OrderByDescending(s => s.Nombre);
+                        break;
+                    case "paterno_desc":
+                        persona = persona.OrderByDescending(s => s.APaterno);
+                        break;
+                    case "paterno_asc":
+                        persona = persona.OrderBy(s => s.APaterno);
+                        break;
+                    case "materno_desc":
+                        persona = persona.OrderByDescending(s => s.AMaterno);
+                        break;
+                    case "materno_asc":
+                        persona = persona.OrderBy(s => s.AMaterno);
+                        break;
+                    default:
+                        persona = persona.OrderBy(s => s.Nombre);
+                        break;
+                }
+
+                // Caja de búsqueda
+                if (!String.IsNullOrEmpty(searchPerson))
+                {
+                    persona = persona.Where(s => s.Nombre.Contains(searchPerson) || s.APaterno.Contains(searchPerson));
+                }
+
+                persona = persona.Include(c => c.ComCatEscolaridad).Include(c => c.ComCatSexo);
+                return View(await persona.AsNoTracking().ToListAsync());
             }
-
-            persona = persona.Include(c => c.ComCatEscolaridad).Include(c => c.ComCatSexo);
-
-            // var cCContext = _context.ComPersona.Include(c => c.ComCatEscolaridad).Include(c => c.ComCatSexo);
-            // return View(await cCContext.ToListAsync());
-            return View(await persona.AsNoTracking().ToListAsync());
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                return null;
+            }
         }
 
         // GET: ComPersona/Details/5

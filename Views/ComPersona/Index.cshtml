@@ -14,22 +14,20 @@
     </div>
     <div class="wrap">
         <div class="form-group">
-            <a asp-action="Create" class="btn btn-default agregar"><i class="fas fa-plus"></i> Agregar</a>
             <form asp-action="Index" method="get">
-                <div>
-                    <input type="text" name="searchPerson" value="@ViewData["CurrentFilter"]" />
-                    <input type="submit" value="Buscar" />
-                    <a asp-action="Index">Ver todos los registros</a>
-                </div>
+                <a asp-action="Create" class="btn btn-default agregar"><i class="fas fa-plus"></i> Agregar</a>
+                <input type="text" class="search-text" maxlength="20" name="searchPerson" value="@ViewData[" CurrentFilter"]" />
+                <button type="submit" class="btn btn-default buscar"><i class="fas fa-search"></i> Buscar</button>
+                <a asp-action="Index" class="btn btn-default limpiar"><i class="fas fa-search-minus"></i> Limpiar</a>
             </form>
         </div>
         <div class="table-design">
             <table>
                 <thead class="table-head">
                     <tr>
-                        <th>Nombre</th>
-                        <th>Apellido Paterno</th>
-                        <th>Apellido Materno</th>
+                        <th><a asp-action="Index" asp-route-valuesOrder="@ViewData["NameOrderAscDesc"]">Nombre</a></th>
+                        <th><a asp-action="Index" asp-route-valuesOrder="@ViewData["APatOrderAscDesc"]">Apellido Paterno</a></th>
+                        <th><a asp-action="Index" asp-route-valuesOrder="@ViewData["AMatOrderAscDesc"]">Apellido Materno</a></th>
                         <th>Género</th>
                         <th></th>
                     </tr>
