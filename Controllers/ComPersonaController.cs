@@ -2,9 +2,11 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Cuidados.Caninos.Marcos.Montiel.Models;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MimeKit;
 
 namespace Cuidados.Caninos.Marcos.Montiel.Controllers
 {
@@ -63,7 +65,23 @@ namespace Cuidados.Caninos.Marcos.Montiel.Controllers
             }
             catch (Exception ex)
             {
-                Console.Write(ex.Message);
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("Send", "marcosmontiel.excepciones@gmail.com"));
+                message.To.Add(new MailboxAddress("Reception", "marcos-gab14@hotmail.com"));
+                message.Subject = "Exceptions";
+                message.Body = new TextPart("plain")
+                {
+                    Text = "Excepción encontrada: " + ex.StackTrace
+                };
+
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, false);
+                    client.Authenticate("marcosmontiel.excepciones@gmail.com", "PruebaExcepciones123");
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+
                 return null;
             }
         }
