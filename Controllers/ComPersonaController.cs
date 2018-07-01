@@ -89,29 +89,77 @@ namespace Cuidados.Caninos.Marcos.Montiel.Controllers
         // GET: ComPersona/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var comPersona = await _context.ComPersona
-                .Include(c => c.ComCatEscolaridad)
-                .Include(c => c.ComCatSexo)
-                .SingleOrDefaultAsync(m => m.ID == id);
-            if (comPersona == null)
+                var comPersona = await _context.ComPersona
+                    .Include(c => c.ComCatEscolaridad)
+                    .Include(c => c.ComCatSexo)
+                    .SingleOrDefaultAsync(m => m.ID == id);
+                if (comPersona == null)
+                {
+                    return NotFound();
+                }
+
+                return View(comPersona);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
-            }
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("Send", "marcosmontiel.excepciones@gmail.com"));
+                message.To.Add(new MailboxAddress("Reception", "marcos-gab14@hotmail.com"));
+                message.Subject = "Exceptions";
+                message.Body = new TextPart("plain")
+                {
+                    Text = "Excepción encontrada: " + ex.StackTrace
+                };
 
-            return View(comPersona);
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, false);
+                    client.Authenticate("marcosmontiel.excepciones@gmail.com", "PruebaExcepciones123");
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+
+                return null;
+            }
         }
 
         // GET: ComPersona/Create
         public IActionResult Create()
         {
-            ViewData["FKComCatEscolaridad"] = new SelectList(_context.ComCatEscolaridad, "ID", "Nombre");
-            ViewData["FKComCatSexo"] = new SelectList(_context.ComCatSexo, "ID", "Nombre");
-            return View();
+            try
+            {
+                ViewData["FKComCatEscolaridad"] = new SelectList(_context.ComCatEscolaridad, "ID", "Nombre");
+                ViewData["FKComCatSexo"] = new SelectList(_context.ComCatSexo, "ID", "Nombre");
+                return View();
+            }
+            catch (Exception ex)
+            {
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("Send", "marcosmontiel.excepciones@gmail.com"));
+                message.To.Add(new MailboxAddress("Reception", "marcos-gab14@hotmail.com"));
+                message.Subject = "Exceptions";
+                message.Body = new TextPart("plain")
+                {
+                    Text = "Excepción encontrada: " + ex.StackTrace
+                };
+
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, false);
+                    client.Authenticate("marcosmontiel.excepciones@gmail.com", "PruebaExcepciones123");
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+
+                return null;
+            }
         }
 
         // POST: ComPersona/Create
@@ -121,33 +169,81 @@ namespace Cuidados.Caninos.Marcos.Montiel.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Nombre,APaterno,AMaterno,Curp,FechaNac,FKComCatSexo,FKComCatEscolaridad")] ComPersona comPersona)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(comPersona);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(comPersona);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["FKComCatEscolaridad"] = new SelectList(_context.ComCatEscolaridad, "ID", "Nombre", comPersona.FKComCatEscolaridad);
+                ViewData["FKComCatSexo"] = new SelectList(_context.ComCatSexo, "ID", "Nombre", comPersona.FKComCatSexo);
+                return View(comPersona);
             }
-            ViewData["FKComCatEscolaridad"] = new SelectList(_context.ComCatEscolaridad, "ID", "Nombre", comPersona.FKComCatEscolaridad);
-            ViewData["FKComCatSexo"] = new SelectList(_context.ComCatSexo, "ID", "Nombre", comPersona.FKComCatSexo);
-            return View(comPersona);
+            catch (Exception ex)
+            {
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("Send", "marcosmontiel.excepciones@gmail.com"));
+                message.To.Add(new MailboxAddress("Reception", "marcos-gab14@hotmail.com"));
+                message.Subject = "Exceptions";
+                message.Body = new TextPart("plain")
+                {
+                    Text = "Excepción encontrada: " + ex.StackTrace
+                };
+
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, false);
+                    client.Authenticate("marcosmontiel.excepciones@gmail.com", "PruebaExcepciones123");
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+
+                return null;
+            }
         }
 
         // GET: ComPersona/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var comPersona = await _context.ComPersona.SingleOrDefaultAsync(m => m.ID == id);
-            if (comPersona == null)
-            {
-                return NotFound();
+                var comPersona = await _context.ComPersona.SingleOrDefaultAsync(m => m.ID == id);
+                if (comPersona == null)
+                {
+                    return NotFound();
+                }
+                ViewData["FKComCatEscolaridad"] = new SelectList(_context.ComCatEscolaridad, "ID", "Nombre", comPersona.FKComCatEscolaridad);
+                ViewData["FKComCatSexo"] = new SelectList(_context.ComCatSexo, "ID", "Nombre", comPersona.FKComCatSexo);
+                return View(comPersona);
             }
-            ViewData["FKComCatEscolaridad"] = new SelectList(_context.ComCatEscolaridad, "ID", "Nombre", comPersona.FKComCatEscolaridad);
-            ViewData["FKComCatSexo"] = new SelectList(_context.ComCatSexo, "ID", "Nombre", comPersona.FKComCatSexo);
-            return View(comPersona);
+            catch (Exception ex)
+            {
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("Send", "marcosmontiel.excepciones@gmail.com"));
+                message.To.Add(new MailboxAddress("Reception", "marcos-gab14@hotmail.com"));
+                message.Subject = "Exceptions";
+                message.Body = new TextPart("plain")
+                {
+                    Text = "Excepción encontrada: " + ex.StackTrace
+                };
+
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, false);
+                    client.Authenticate("marcosmontiel.excepciones@gmail.com", "PruebaExcepciones123");
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+
+                return null;
+            }
         }
 
         // POST: ComPersona/Edit/5
@@ -157,54 +253,102 @@ namespace Cuidados.Caninos.Marcos.Montiel.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Nombre,APaterno,AMaterno,Curp,FechaNac,FKComCatSexo,FKComCatEscolaridad")] ComPersona comPersona)
         {
-            if (id != comPersona.ID)
+            try
             {
-                return NotFound();
-            }
+                if (id != comPersona.ID)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(comPersona);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ComPersonaExists(comPersona.ID))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(comPersona);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!ComPersonaExists(comPersona.ID))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+                ViewData["FKComCatEscolaridad"] = new SelectList(_context.ComCatEscolaridad, "ID", "Nombre", comPersona.FKComCatEscolaridad);
+                ViewData["FKComCatSexo"] = new SelectList(_context.ComCatSexo, "ID", "Nombre", comPersona.FKComCatSexo);
+                return View(comPersona);
             }
-            ViewData["FKComCatEscolaridad"] = new SelectList(_context.ComCatEscolaridad, "ID", "Nombre", comPersona.FKComCatEscolaridad);
-            ViewData["FKComCatSexo"] = new SelectList(_context.ComCatSexo, "ID", "Nombre", comPersona.FKComCatSexo);
-            return View(comPersona);
+            catch (Exception ex)
+            {
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("Send", "marcosmontiel.excepciones@gmail.com"));
+                message.To.Add(new MailboxAddress("Reception", "marcos-gab14@hotmail.com"));
+                message.Subject = "Exceptions";
+                message.Body = new TextPart("plain")
+                {
+                    Text = "Excepción encontrada: " + ex.StackTrace
+                };
+
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, false);
+                    client.Authenticate("marcosmontiel.excepciones@gmail.com", "PruebaExcepciones123");
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+
+                return null;
+            }
         }
 
         // GET: ComPersona/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var comPersona = await _context.ComPersona
-                .Include(c => c.ComCatEscolaridad)
-                .Include(c => c.ComCatSexo)
-                .SingleOrDefaultAsync(m => m.ID == id);
-            if (comPersona == null)
+                var comPersona = await _context.ComPersona
+                    .Include(c => c.ComCatEscolaridad)
+                    .Include(c => c.ComCatSexo)
+                    .SingleOrDefaultAsync(m => m.ID == id);
+                if (comPersona == null)
+                {
+                    return NotFound();
+                }
+
+                return View(comPersona);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
-            }
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("Send", "marcosmontiel.excepciones@gmail.com"));
+                message.To.Add(new MailboxAddress("Reception", "marcos-gab14@hotmail.com"));
+                message.Subject = "Exceptions";
+                message.Body = new TextPart("plain")
+                {
+                    Text = "Excepción encontrada: " + ex.StackTrace
+                };
 
-            return View(comPersona);
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, false);
+                    client.Authenticate("marcosmontiel.excepciones@gmail.com", "PruebaExcepciones123");
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+
+                return null;
+            }
         }
 
         // POST: ComPersona/Delete/5
@@ -212,10 +356,34 @@ namespace Cuidados.Caninos.Marcos.Montiel.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var comPersona = await _context.ComPersona.SingleOrDefaultAsync(m => m.ID == id);
-            _context.ComPersona.Remove(comPersona);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                var comPersona = await _context.ComPersona.SingleOrDefaultAsync(m => m.ID == id);
+                _context.ComPersona.Remove(comPersona);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("Send", "marcosmontiel.excepciones@gmail.com"));
+                message.To.Add(new MailboxAddress("Reception", "marcos-gab14@hotmail.com"));
+                message.Subject = "Exceptions";
+                message.Body = new TextPart("plain")
+                {
+                    Text = "Excepción encontrada: " + ex.StackTrace
+                };
+
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, false);
+                    client.Authenticate("marcosmontiel.excepciones@gmail.com", "PruebaExcepciones123");
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+
+                return null;
+            }
         }
 
         private bool ComPersonaExists(int id)

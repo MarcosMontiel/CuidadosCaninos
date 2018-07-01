@@ -38,4 +38,7 @@
     <None Include="wwwroot\js\formulario.js" />
     <None Include="wwwroot\css\tablas.css" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\ClasesGenericas\" />
+  </ItemGroup>
 </Project>
