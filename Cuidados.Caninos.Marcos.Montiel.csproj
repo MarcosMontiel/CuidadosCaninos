@@ -10,6 +10,7 @@
     <PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
     <PackageReference Include="Bootstrap.Datepicker" Version="1.7.1" />
     <PackageReference Include="MailKit" Version="1.18.0" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.4" />
   </ItemGroup>
 
   <ItemGroup>

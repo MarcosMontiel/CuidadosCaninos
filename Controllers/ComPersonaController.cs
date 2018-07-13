@@ -1,7 +1,10 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Cuidados.Caninos.Marcos.Montiel.Models;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -20,18 +23,36 @@ namespace Cuidados.Caninos.Marcos.Montiel.Controllers
         }
 
         // GET: ComPersona
-        public async Task<IActionResult> Index(string valuesOrder, string searchPerson)
+        public async Task<IActionResult> Index(string reporte, string valuesOrder, string searchPerson)
         {
             try
             {
-                ViewData["CurrentFilter"] = searchPerson;
+                var persona = from s in _context.ComPersona select s;
+
+                // Generar reporte PDF
+                ViewData["GenerateReports"] = "reporte";
+
+                if (!String.IsNullOrEmpty(reporte))
+                {
+                    Document doc = new Document(PageSize.A4);
+                    PdfWriter writer = PdfWriter.GetInstance(doc,
+                            new FileStream(@"/Users/marcosmontiel/Desktop/personas.pdf", FileMode.Create));
+                    doc.AddTitle("Reporte - Personas");
+                    doc.AddCreator("Marcos Gabriel Cruz Montiel");
+                    doc.Open();
+
+                    Font font = new Font(Font.HELVETICA, 12, Font.NORMAL, BaseColor.Black);
+                    doc.Add(new Paragraph("Reporte - Personas"));
+                    doc.Add(Chunk.Newline);
+                    doc.Close();
+                    writer.Close();
+                }
+
+                // Ordenar valores desc y asc en la tabla
                 ViewData["NameOrderAscDesc"] = String.IsNullOrEmpty(valuesOrder) ? "nombre_desc" : "";
                 ViewData["APatOrderAscDesc"] = valuesOrder == "paterno_asc" ? "paterno_desc" : "paterno_asc";
                 ViewData["AMatOrderAscDesc"] = valuesOrder == "materno_asc" ? "materno_desc" : "materno_asc";
 
-                var persona = from s in _context.ComPersona select s;
-
-                // Ordenar valores desc y asc en la tabla
                 switch (valuesOrder)
                 {
                     case "nombre_desc":
@@ -55,6 +76,8 @@ namespace Cuidados.Caninos.Marcos.Montiel.Controllers
                 }
 
                 // Caja de búsqueda
+                ViewData["CurrentFilter"] = searchPerson;
+
                 if (!String.IsNullOrEmpty(searchPerson))
                 {
                     persona = persona.Where(s => s.Nombre.Contains(searchPerson) || s.APaterno.Contains(searchPerson));
