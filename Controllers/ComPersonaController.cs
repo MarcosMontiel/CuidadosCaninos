@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cuidados.Caninos.Marcos.Montiel.Models;
 using iTextSharp.text;
+using iTextSharp.text.html;
 using iTextSharp.text.pdf;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Mvc;
@@ -28,22 +29,185 @@ namespace Cuidados.Caninos.Marcos.Montiel.Controllers
             try
             {
                 var persona = from s in _context.ComPersona select s;
+                persona = persona.Include(c => c.ComCatEscolaridad).Include(c => c.ComCatSexo);
 
                 // Generar reporte PDF
                 ViewData["GenerateReports"] = "reporte";
 
                 if (!String.IsNullOrEmpty(reporte))
                 {
-                    Document doc = new Document(PageSize.A4);
+                    // Creamos el documento PDF con el formato de hoja A4, y Rotate() para ponerla horizontal.
+                    Document doc = new Document(PageSize.A4.Rotate());
+                    // Indicamos la ruta donde se va a guardar el documento.
                     PdfWriter writer = PdfWriter.GetInstance(doc,
                             new FileStream(@"/Users/marcosmontiel/Desktop/personas.pdf", FileMode.Create));
+                    // Colocamos el titulo y autor del documento (Esto no será visible en el documento).
                     doc.AddTitle("Reporte - Personas");
                     doc.AddCreator("Marcos Gabriel Cruz Montiel");
+                    // Abrimos el documento.
                     doc.Open();
-
-                    Font font = new Font(Font.HELVETICA, 12, Font.NORMAL, BaseColor.Black);
+                    // Creamos el tipo de fuente, tamaño, estilo y color que vamos a utilizar.
+                    Font fontPrincipal = new Font(Font.HELVETICA, 12, Font.BOLD, BaseColor.White);
+                    Font fontBody = new Font(Font.HELVETICA, 12, Font.NORMAL, BaseColor.Black);
+                    // Añadimos el encabezado del documento.
                     doc.Add(new Paragraph("Reporte - Personas"));
                     doc.Add(Chunk.Newline);
+                    // Creamos la tabla que contendrá los registro de la tabla ComPersona.
+                    PdfPTable tblPersona = new PdfPTable(7)
+                    {
+                        WidthPercentage = 100
+                    };
+                    // Configuramos el titulo de las columnas.
+                    PdfPCell colNombre = new PdfPCell(new Phrase("Nombre", fontPrincipal))
+                    {
+                        BorderWidth = 0,
+                        BorderColor = WebColors.GetRgbColor("#009432"),
+                        BackgroundColor = WebColors.GetRgbColor("#009432"),
+                        PaddingTop = 10,
+                        PaddingRight = 0,
+                        PaddingBottom = 13,
+                        PaddingLeft = 15,
+                        VerticalAlignment = Element.ALIGN_CENTER
+                    };
+
+                    PdfPCell colAPaterno = new PdfPCell(new Phrase("A. Paterno", fontPrincipal))
+                    {
+                        BorderWidth = 0,
+                        BorderColor = WebColors.GetRgbColor("#009432"),
+                        BackgroundColor = WebColors.GetRgbColor("#009432"),
+                        PaddingTop = 10,
+                        PaddingRight = 0,
+                        PaddingBottom = 13,
+                        PaddingLeft = 15,
+                        VerticalAlignment = Element.ALIGN_CENTER
+                    };
+
+                    PdfPCell colAMaterno = new PdfPCell(new Phrase("A. Materno", fontPrincipal))
+                    {
+                        BorderWidth = 0,
+                        BorderColor = WebColors.GetRgbColor("#009432"),
+                        BackgroundColor = WebColors.GetRgbColor("#009432"),
+                        PaddingTop = 10,
+                        PaddingRight = 0,
+                        PaddingBottom = 13,
+                        PaddingLeft = 15,
+                        VerticalAlignment = Element.ALIGN_CENTER
+                    };
+
+                    PdfPCell colGenero = new PdfPCell(new Phrase("Género", fontPrincipal))
+                    {
+                        BorderWidth = 0,
+                        BorderColor = WebColors.GetRgbColor("#009432"),
+                        BackgroundColor = WebColors.GetRgbColor("#009432"),
+                        PaddingTop = 10,
+                        PaddingRight = 0,
+                        PaddingBottom = 13,
+                        PaddingLeft = 15,
+                        VerticalAlignment = Element.ALIGN_CENTER
+                    };
+
+                    PdfPCell colFechaNac = new PdfPCell(new Phrase("Fecha de Nac.", fontPrincipal))
+                    {
+                        BorderWidth = 0,
+                        BorderColor = WebColors.GetRgbColor("#009432"),
+                        BackgroundColor = WebColors.GetRgbColor("#009432"),
+                        PaddingTop = 10,
+                        PaddingRight = 0,
+                        PaddingBottom = 13,
+                        PaddingLeft = 15,
+                        VerticalAlignment = Element.ALIGN_CENTER
+                    };
+
+                    PdfPCell colCurp = new PdfPCell(new Phrase("C.U.R.P", fontPrincipal))
+                    {
+                        BorderWidth = 0,
+                        BorderColor = WebColors.GetRgbColor("#009432"),
+                        BackgroundColor = WebColors.GetRgbColor("#009432"),
+                        PaddingTop = 10,
+                        PaddingRight = 0,
+                        PaddingBottom = 13,
+                        PaddingLeft = 15,
+                        VerticalAlignment = Element.ALIGN_CENTER
+                    };
+
+                    PdfPCell colEscolaridad = new PdfPCell(new Phrase("Escolaridad", fontPrincipal))
+                    {
+                        BorderWidth = 0,
+                        BorderColor = WebColors.GetRgbColor("#009432"),
+                        BackgroundColor = WebColors.GetRgbColor("#009432"),
+                        PaddingTop = 10,
+                        PaddingRight = 0,
+                        PaddingBottom = 13,
+                        PaddingLeft = 15,
+                        VerticalAlignment = Element.ALIGN_CENTER
+                    };
+
+                    // Añadimos las celdas a la tabla.
+                    tblPersona.AddCell(colNombre);
+                    tblPersona.AddCell(colAPaterno);
+                    tblPersona.AddCell(colAMaterno);
+                    tblPersona.AddCell(colGenero);
+                    tblPersona.AddCell(colFechaNac);
+                    tblPersona.AddCell(colCurp);
+                    tblPersona.AddCell(colEscolaridad);
+
+                    // Llenamos la tabla de información.
+                    foreach (var item in persona){
+                        colNombre = new PdfPCell(new Phrase(item.Nombre, fontBody))
+                        {
+                            BorderWidth = 0,
+                            BorderWidthBottom = 0.75f
+                        };
+
+                        colAPaterno = new PdfPCell(new Phrase(item.APaterno, fontBody))
+                        {
+                            BorderWidth = 0,
+                            BorderWidthBottom = 0.75f
+                        };
+
+                        colAMaterno = new PdfPCell(new Phrase(item.AMaterno, fontBody))
+                        {
+                            BorderWidth = 0,
+                            BorderWidthBottom = 0.75f
+                        };
+
+                        colGenero = new PdfPCell(new Phrase(item.ComCatSexo.Nombre, fontBody))
+                        {
+                            BorderWidth = 0,
+                            BorderWidthBottom = 0.75f
+                        };
+
+                        colFechaNac = new PdfPCell(new Phrase(item.FechaNac.ToShortDateString(), fontBody))
+                        {
+                            BorderWidth = 0,
+                            BorderWidthBottom = 0.75f
+                        };
+
+                        colCurp = new PdfPCell(new Phrase(item.Curp, fontBody))
+                        {
+                            BorderWidth = 0,
+                            BorderWidthBottom = 0.75f
+                        };
+
+                        colEscolaridad = new PdfPCell(new Phrase(item.ComCatEscolaridad.Nombre, fontBody))
+                        {
+                            BorderWidth = 0,
+                            BorderWidthBottom = 0.75f
+                        };
+
+                        // Añadimos las celdas a la tabla.
+                        tblPersona.AddCell(colNombre);
+                        tblPersona.AddCell(colAPaterno);
+                        tblPersona.AddCell(colAMaterno);
+                        tblPersona.AddCell(colGenero);
+                        tblPersona.AddCell(colFechaNac);
+                        tblPersona.AddCell(colCurp);
+                        tblPersona.AddCell(colEscolaridad);
+                    }
+
+                    // Añadimos la tabla al documento.
+                    doc.Add(tblPersona);
+
                     doc.Close();
                     writer.Close();
                 }
@@ -83,7 +247,6 @@ namespace Cuidados.Caninos.Marcos.Montiel.Controllers
                     persona = persona.Where(s => s.Nombre.Contains(searchPerson) || s.APaterno.Contains(searchPerson));
                 }
 
-                persona = persona.Include(c => c.ComCatEscolaridad).Include(c => c.ComCatSexo);
                 return View(await persona.AsNoTracking().ToListAsync());
             }
             catch (Exception ex)
