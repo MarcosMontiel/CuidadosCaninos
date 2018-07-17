@@ -47,8 +47,8 @@ namespace Cuidados.Caninos.Marcos.Montiel.Controllers
                     // Abrimos el documento.
                     doc.Open();
                     // Creamos el tipo de fuente, tamaño, estilo y color que vamos a utilizar.
-                    Font fontPrincipal = new Font(Font.HELVETICA, 12, Font.BOLD, BaseColor.White);
-                    Font fontBody = new Font(Font.HELVETICA, 12, Font.NORMAL, BaseColor.Black);
+                    Font fontPrincipal = new Font(Font.HELVETICA, 10, Font.BOLD, BaseColor.White);
+                    Font fontBody = new Font(Font.HELVETICA, 8, Font.NORMAL, BaseColor.Black);
                     // Añadimos el encabezado del documento.
                     doc.Add(new Paragraph("Reporte - Personas"));
                     doc.Add(Chunk.Newline);
@@ -156,43 +156,78 @@ namespace Cuidados.Caninos.Marcos.Montiel.Controllers
                         colNombre = new PdfPCell(new Phrase(item.Nombre, fontBody))
                         {
                             BorderWidth = 0,
-                            BorderWidthBottom = 0.75f
+                            BorderWidthBottom = 0.75f,
+                            PaddingTop = 10,
+                            PaddingRight = 0,
+                            PaddingBottom = 13,
+                            PaddingLeft = 15,
+                            BorderColorBottom = BaseColor.Gray
                         };
 
                         colAPaterno = new PdfPCell(new Phrase(item.APaterno, fontBody))
                         {
                             BorderWidth = 0,
-                            BorderWidthBottom = 0.75f
+                            BorderWidthBottom = 0.75f,
+                            PaddingTop = 10,
+                            PaddingRight = 0,
+                            PaddingBottom = 13,
+                            PaddingLeft = 15,
+                            BorderColorBottom = BaseColor.Gray
                         };
 
                         colAMaterno = new PdfPCell(new Phrase(item.AMaterno, fontBody))
                         {
                             BorderWidth = 0,
-                            BorderWidthBottom = 0.75f
+                            BorderWidthBottom = 0.75f,
+                            PaddingTop = 10,
+                            PaddingRight = 0,
+                            PaddingBottom = 13,
+                            PaddingLeft = 15,
+                            BorderColorBottom = BaseColor.Gray
                         };
 
                         colGenero = new PdfPCell(new Phrase(item.ComCatSexo.Nombre, fontBody))
                         {
                             BorderWidth = 0,
-                            BorderWidthBottom = 0.75f
+                            BorderWidthBottom = 0.75f,
+                            PaddingTop = 10,
+                            PaddingRight = 0,
+                            PaddingBottom = 13,
+                            PaddingLeft = 15,
+                            BorderColorBottom = BaseColor.Gray
                         };
 
                         colFechaNac = new PdfPCell(new Phrase(item.FechaNac.ToShortDateString(), fontBody))
                         {
                             BorderWidth = 0,
-                            BorderWidthBottom = 0.75f
+                            BorderWidthBottom = 0.75f,
+                            PaddingTop = 10,
+                            PaddingRight = 0,
+                            PaddingBottom = 13,
+                            PaddingLeft = 15,
+                            BorderColorBottom = BaseColor.Gray
                         };
 
                         colCurp = new PdfPCell(new Phrase(item.Curp, fontBody))
                         {
                             BorderWidth = 0,
-                            BorderWidthBottom = 0.75f
+                            BorderWidthBottom = 0.75f,
+                            PaddingTop = 10,
+                            PaddingRight = 0,
+                            PaddingBottom = 13,
+                            PaddingLeft = 15,
+                            BorderColorBottom = BaseColor.Gray
                         };
 
                         colEscolaridad = new PdfPCell(new Phrase(item.ComCatEscolaridad.Nombre, fontBody))
                         {
                             BorderWidth = 0,
-                            BorderWidthBottom = 0.75f
+                            BorderWidthBottom = 0.75f,
+                            PaddingTop = 10,
+                            PaddingRight = 0,
+                            PaddingBottom = 13,
+                            PaddingLeft = 15,
+                            BorderColorBottom = BaseColor.Gray
                         };
 
                         // Añadimos las celdas a la tabla.
